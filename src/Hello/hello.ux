@@ -2,7 +2,7 @@
     <!-- template里只能有一个根节点 -->
     <div class="container">
         <text class="title">
-            Hello {{title}}
+            Hello1 {{title}}
         </text>
     </div>
 </template>
