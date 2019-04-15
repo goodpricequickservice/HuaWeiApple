@@ -1,6 +1,9 @@
+<import name="component_search_title" src="./component/Component_Search_Title/index.ux"></import>
+<import name="component_set" src="./component/Component_Set/index.ux"></import>
 <template>
     <!-- template里只能有一个根节点 -->
     <div class="container">
+    <component_search_title></component_search_title>
         <text class="title">
             Hello111 {{title}}
         </text>
@@ -10,7 +13,7 @@
 <style>
     .container {
         flex-direction: column;
-		justify-content: center;
+		/* justify-content: center; */
 		align-items: center;
     }
 
