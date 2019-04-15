@@ -4,9 +4,22 @@
     <!-- template里只能有一个根节点 -->
     <div class="container">
     <component_search_title></component_search_title>
-        <text class="title">
+     <!-- 列表 -->
+     <list class="list"   id="list" scrollpage="{{scrollPage}}">
+      <!-- 列表元素，属性type值相同时，需要确保渲染后的视图布局也完全相同，用show代替if，确保布局视图不变 -->
+      <list-item type="listItem" class="item item-color" for="{{listData}}">
+          <text class="txt">{{$item}}--{{$idx}}</text>
+      </list-item>
+
+      <!-- 加载更多 -->
+      <!-- <list-item type="loadMore" class="load-more" if="{{loadMore}}">
+          <progress type="circular"></progress>
+          <text>加载更多</text>
+      </list-item> -->
+  </list>
+        <!-- <text class="title">
             Hello111 {{title}}
-        </text>
+        </text> -->
     </div>
 </template>
 
@@ -20,15 +33,40 @@
     .title {
         font-size: 100px;
     }
+    .list {
+        flex-direction: column;
+        flex: 1;
+        padding-left: 30px;
+        padding-right: 30px;
+        columns: 1;
+    }
+    .item {
+        height: 150px;
+        align-items: flex-start;
+        margin-bottom: 15px;
+        border-color: #9400D3;
+        border-width: 5px;
+        margin-right: 20px;
+    }
+
 </style>
 
 <script>
   module.exports = {
     data: {
-    
-      title: 'World'
+      title: 'World',
+      listData: [],
+      loadMore: true,
+      listAdd: ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z'],       
+      scrollPage: false,
+      showListBtn: true,
+      listClass: 'selected',
+          
     },
     onInit() {
+     // this.$page.setTitleBar({ text: 'list' })
+      // 初始化列表数据
+      this.listData = [].concat(this.listAdd);
       this.$page.setTitleBar({
         text: 'menu',
         textColor: '#ffffff',
