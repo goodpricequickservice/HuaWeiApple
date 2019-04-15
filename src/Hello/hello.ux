@@ -25,6 +25,7 @@
 <script>
   module.exports = {
     data: {
+    
       title: 'World'
     },
     onInit() {
