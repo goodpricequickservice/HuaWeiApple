@@ -18,7 +18,7 @@
                 </div>
                 <div class="div_column">
                     <text class="item_des">{{$item.patchDescb}}</text>
-                    <text class="item_time">{{$item.activePrice}} {{$item.orginPrice}}</text>
+                    <text class="item_time">当前最低价￥{{$item.nowLowPrice}} </text>
                     <text class="item_title">相比上一次活动价 {{$item.preLowPirce}}%↓</text>
                 </div>
             </list-item>
