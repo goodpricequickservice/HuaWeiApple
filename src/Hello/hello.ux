@@ -3,29 +3,47 @@
     <!-- template里只能有一个根节点 -->
     <div class="container">
         <component_search_title></component_search_title>
+
+        <div class="div_row">
+            <image class="title_free " src="https://ress.98yigou.com/image/2019/03/30/17/03/1861adf8e6334eb0a37fbb1417f4697e.png"></image>
+            <text class="title_name">限时免费</text>
+        </div>
+
         <!-- 列表 -->
         <list class="list" id="list" scrollpage="{{scrollPage}}">
             <!-- 列表元素，属性type值相同时，需要确保渲染后的视图布局也完全相同，用show代替if，确保布局视图不变 -->
-            <list-item type="listItem" class="item item-color" for="{{listData}}">
+            <list-item type="listItem" class="item item-color" for="{{freeGoodsDayList}}">
                 <div class="div_row">
-                    <image class="item_image " src="component/Component_Search_Title/img/defaule_img.png"></image>
+                    <image class="item_image " src='{{$item.fuliGoodsLogo}}'></image>
                 </div>
                 <div class="div_column">
-                    <text class="item_des">{{$item}}--{{$idx}}</text>
-                    <text class="item_time">{{$item}}--{{$idx}}</text>
-                    <text class="item_title">{{$item}}--{{$idx}}</text>
+                    <text class="item_des">{{$item.patchDescb}}</text>
+                    <text class="item_time">{{$item.activePrice}} {{$item.orginPrice}}</text>
+                    <text class="item_title">相比上一次活动价 {{$item.preLowPirce}}%↓</text>
                 </div>
             </list-item>
-
-            <!-- 加载更多 -->
-            <!-- <list-item type="loadMore" class="load-more" if="{{loadMore}}">
-          <progress type="circular"></progress>
-          <text>加载更多</text>
-      </list-item> -->
         </list>
-        <!-- <text class="title">
-            Hello111 {{title}}
-        </text> -->
+
+        <div class="div_row">
+            <image class="title_free " src="https://ress.98yigou.com/image/2019/03/28/02/03/c20c5fb3f66a4cb4ba757bfe1f76741e.png"></image>
+            <text class="title_name">今日好价</text>
+        </div>
+       
+        <!-- 列表 -->
+        <list class="list" id="list2" scrollpage="{{scrollPage}}">
+            <!-- 列表元素，属性type值相同时，需要确保渲染后的视图布局也完全相同，用show代替if，确保布局视图不变 -->
+            <list-item type="listItem" class="item item-color" for="{{goodPriceDayList}}">
+                <div class="div_row">
+                    <image class="item_image " src='{{$item.fuliGoodsLogo}}'></image>
+                </div>
+                <div class="div_column">
+                    <text class="item_des">{{$item.patchDescb}}</text>
+                    <text class="item_time">{{$item.activePrice}} {{$item.orginPrice}}</text>
+                    <text class="item_title">相比上一次活动价 {{$item.preLowPirce}}%↓</text>
+                </div>
+            </list-item>
+        </list>
+
     </div>
 </template>
 
@@ -41,6 +59,18 @@
         font-size: 100px;
     }
 
+    .title_free {
+        width: 70px;
+        height: 70px;
+        margin-right: 17px;
+    }
+
+    .title_name {
+        font-size: 60px;
+        lines: 1;
+        color: #000000;
+    }
+
     .list {
         flex-direction: column;
         flex: 1;
@@ -52,7 +82,6 @@
         align-items: flex-start;
         margin-bottom: 15px;
         border-color: #9400D3;
-        border-width: 1px;
         margin-right: 20px;
     }
 
@@ -65,7 +94,8 @@
     .div_column {
         flex-direction: column;
         /* justify-content: center; */
-        align-items: center;
+        /* align-items:center; */
+        margin-bottom: 20px;
     }
 
     .item_des {
@@ -81,7 +111,7 @@
     }
 
     .item_title {
-        font-size: 50px;
+        font-size: 35px;
         lines: 1;
         color: #000000;
     }
@@ -94,12 +124,17 @@
 </style>
 
 <script>
+    import fetch from '@system.fetch'
+    import prompt from '@system.prompt'
+
     module.exports = {
         data: {
             title: 'World',
-            listData: [],
+            goodPriceDayList: [],
+            freeGoodsDayList: [],
+            goodsRanklist: [],
             loadMore: true,
-            listAdd: ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z'],
+            // listAdd: ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z'],
             scrollPage: false,
             showListBtn: true,
             listClass: 'selected',
@@ -108,7 +143,8 @@
         onInit() {
             // this.$page.setTitleBar({ text: 'list' })
             // 初始化列表数据
-            this.listData = [].concat(this.listAdd);
+            this.refresh();
+
             this.$page.setTitleBar({
                 text: 'menu',
                 textColor: '#ffffff',
@@ -116,6 +152,39 @@
                 backgroundOpacity: 0.5,
                 menu: true
             })
-        }
+        },
+      
+        goodprice: function () {
+            var that = this;
+            console.log(" postjson 11111111111111111")
+            // var str = '{"username":"123","password":"123"}';
+            // var datenow = new Date().getTime();;
+            fetch.fetch({
+                url: "https://www.rfuli.cn/w/goodprice/index.json?ccit=1555430191784",
+                // data:JSON.parse(str),
+                // header:{"User-Agent": "Mozilla/5.0 (Linux; U; Android 7.0; zh-cn; STF-AL00 Build/HUAWEISTF-AL00) AppleWebKit/537.36 (KHTML, like Gecko)Version/4.0 Chrome/37.0.0.0 MQQBrowser/7.9 Mobile Safari/537.36","Accept-Encoding": "gzip, deflate","Accept-Language": "zh-CN,en-US;q=0.8,en;q=0.6"},
+                responseType: 'json',
+                method: "GET",
+                success: function (ret) {
+                    // that.goodPriceDayList = "获取数据：" + JSON.stringify(ret.data);
+                    console.log(" postjson " + JSON.stringify(ret.data.goodPriceDayList))
+                    that.goodPriceDayList = [].concat(ret.data.goodPriceDayList);
+                    that.showVar = true;
+                    prompt.showToast({
+                        message: "success"
+                    })
+                },
+                fail: function (msg, code) {
+                    console.log(msg, code);
+                },
+                complete: function () {
+                    console.log("complete");
+                }
+            })
+        },
+        
+        refresh: function () {
+            this.goodprice();
+        },
     }
 </script>
