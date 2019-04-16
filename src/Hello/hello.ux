@@ -1,5 +1,4 @@
 <import name="component_search_title" src="./component/Component_Search_Title/index.ux"></import>
-<import name="component_set" src="./component/Component_Set/index.ux"></import>
 <template>
     <!-- template里只能有一个根节点 -->
     <div class="container">
@@ -17,9 +16,6 @@
                     <text class="item_title">{{$item}}--{{$idx}}</text>
                 </div>
             </list-item>
-            flex-direction: ;
-            /* justify-content: center; */
-            align-items: center;
 
             <!-- 加载更多 -->
             <!-- <list-item type="loadMore" class="load-more" if="{{loadMore}}">
