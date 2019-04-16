@@ -3,20 +3,30 @@
 <template>
     <!-- template里只能有一个根节点 -->
     <div class="container">
-    <component_search_title></component_search_title>
-     <!-- 列表 -->
-     <list class="list"   id="list" scrollpage="{{scrollPage}}">
-      <!-- 列表元素，属性type值相同时，需要确保渲染后的视图布局也完全相同，用show代替if，确保布局视图不变 -->
-      <list-item type="listItem" class="item item-color" for="{{listData}}">
-          <text class="txt">{{$item}}--{{$idx}}</text>
-      </list-item>
+        <component_search_title></component_search_title>
+        <!-- 列表 -->
+        <list class="list" id="list" scrollpage="{{scrollPage}}">
+            <!-- 列表元素，属性type值相同时，需要确保渲染后的视图布局也完全相同，用show代替if，确保布局视图不变 -->
+            <list-item type="listItem" class="item item-color" for="{{listData}}">
+                <div class="div_row">
+                    <image class="item_image " src="component/Component_Search_Title/img/defaule_img.png"></image>
+                </div>
+                <div class="div_column">
+                    <text class="item_des">{{$item}}--{{$idx}}</text>
+                    <text class="item_time">{{$item}}--{{$idx}}</text>
+                    <text class="item_title">{{$item}}--{{$idx}}</text>
+                </div>
+            </list-item>
+            flex-direction: ;
+            /* justify-content: center; */
+            align-items: center;
 
-      <!-- 加载更多 -->
-      <!-- <list-item type="loadMore" class="load-more" if="{{loadMore}}">
+            <!-- 加载更多 -->
+            <!-- <list-item type="loadMore" class="load-more" if="{{loadMore}}">
           <progress type="circular"></progress>
           <text>加载更多</text>
       </list-item> -->
-  </list>
+        </list>
         <!-- <text class="title">
             Hello111 {{title}}
         </text> -->
@@ -26,53 +36,90 @@
 <style>
     .container {
         flex-direction: column;
-		/* justify-content: center; */
-		align-items: center;
+        /* justify-content: center; */
+        align-items: center;
     }
+
 
     .title {
         font-size: 100px;
     }
+
     .list {
         flex-direction: column;
         flex: 1;
         padding-left: 30px;
         padding-right: 30px;
     }
+
     .item {
-        height: 150px;
         align-items: flex-start;
         margin-bottom: 15px;
         border-color: #9400D3;
-        border-width: 5px;
+        border-width: 1px;
         margin-right: 20px;
     }
 
+    .div_row {
+        flex-direction: row;
+        /* justify-content: center; */
+        align-items: center;
+    }
+
+    .div_column {
+        flex-direction: column;
+        /* justify-content: center; */
+        align-items: center;
+    }
+
+    .item_des {
+        font-size: 40px;
+        lines: 2;
+        color: #000000;
+    }
+
+    .item_time {
+        font-size: 30px;
+        lines: 1;
+        color: #cd5c5c;
+    }
+
+    .item_title {
+        font-size: 50px;
+        lines: 1;
+        color: #000000;
+    }
+
+    .item_image {
+        width: 180px;
+        height: 180px;
+        margin-right: 17px;
+    }
 </style>
 
 <script>
-  module.exports = {
-    data: {
-      title: 'World',
-      listData: [],
-      loadMore: true,
-      listAdd: ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z'],       
-      scrollPage: false,
-      showListBtn: true,
-      listClass: 'selected',
-          
-    },
-    onInit() {
-     // this.$page.setTitleBar({ text: 'list' })
-      // 初始化列表数据
-      this.listData = [].concat(this.listAdd);
-      this.$page.setTitleBar({
-        text: 'menu',
-        textColor: '#ffffff',
-        backgroundColor: '#007DFF',
-        backgroundOpacity: 0.5,
-        menu:true
-      })
+    module.exports = {
+        data: {
+            title: 'World',
+            listData: [],
+            loadMore: true,
+            listAdd: ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z'],
+            scrollPage: false,
+            showListBtn: true,
+            listClass: 'selected',
+
+        },
+        onInit() {
+            // this.$page.setTitleBar({ text: 'list' })
+            // 初始化列表数据
+            this.listData = [].concat(this.listAdd);
+            this.$page.setTitleBar({
+                text: 'menu',
+                textColor: '#ffffff',
+                backgroundColor: '#007DFF',
+                backgroundOpacity: 0.5,
+                menu: true
+            })
+        }
     }
-  }
 </script>
