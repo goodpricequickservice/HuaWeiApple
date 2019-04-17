@@ -12,6 +12,23 @@
       "debugServerPort": 8088,
       "remoteDebug": true,
       "elementMode": false
+    },
+    {
+      "name": "Debug Widget freeCard on Device",
+      "type": "fastapp",
+      "request": "launch",
+      "device": "${command:fastapp.choose-device}",
+      "cwd": "${workspaceRoot}",
+      "logLevel": "log",
+      "adbPort": 5037,
+      "debugServerPort": 8088,
+      "remoteDebug": true,
+      "elementMode": false,
+      "widgetUri": "card/freeCard",
+      "isRun": false,
+      "autoRun": false,
+      "widgetMaxWidth": 750,
+      "widgetParams": "{}"
     }
   ],
   "currentWidgetUri": null,

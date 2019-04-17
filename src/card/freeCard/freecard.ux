@@ -1,0 +1,94 @@
+<template>
+    <div class="card_box">
+        <div class="title_box">
+            <text class="title_text">热门推荐</text>
+        </div>
+        <div class="content_box">
+
+            <div class="content_image_box" onclick="openApp">
+                <image src="https://res3.vmallres.com/shopdc/pic/f7061f6b-0b24-4ad2-937f-d7bd9983c945.png" class="content_image" />
+                <text class="content_text_1">华为P20</text>
+                <text class="content_text_1">华为商城</text>
+            </div>
+            <div class="content_image_box" onclick="openApp">
+                <image src="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1522735432719&di=02ad2b76ef4885fd28a72f63e8ca9bf2&imgtype=0&src=http%3A%2F%2Fimg1.gtimg.com%2Fent%2Fpics%2Fhv1%2F1%2F63%2F1803%2F117256141.jpg"
+                    class="content_image" />
+                <text class="content_text_1">电影</text>
+                <text class="content_text_1">院线热映</text>
+            </div>
+            <div class="content_image_box" onclick="openApp">
+                <image src="http://cms-bucket.nosdn.127.net/0fb4fd4762ec4af88de0690e57bf291b20180403072048.jpeg?imageView&thumbnail=550x0"
+                    class="content_image" />
+                <text class="content_text_1">科技</text>
+                <text class="content_text_1">苹果mac自主芯片</text>
+            </div>
+        </div>
+
+    </div>
+</template>
+
+<style>
+    .card_box {
+        flex-direction: column;
+    }
+
+    .title_box {
+        background-color: transparent;
+        border-top-left-radius: 12px;
+        border-top-right-radius: 12px;
+    }
+
+    .title_logo {
+        width: 32px;
+        height: 32px;
+        margin-left: 15px;
+        margin-top: 24px;
+        margin-bottom: 16px;
+        flex-direction: column;
+    }
+
+    .title_text {
+        flex-direction: column;
+        color: #000000;
+        font-size: 35px;
+        margin-left: 24px;
+        margin-top: 24px;
+        margin-bottom: 16px;
+        line-height: 30px;
+    }
+
+    .content_box {
+        background-color: transparent;
+        padding: 20px 12px 20px 15px;
+    }
+
+    .content_image_box {
+        flex-direction: column;
+        border-radius: 12px;
+    }
+
+    .content_image {
+        width: 215px;
+        height: 180px;
+        margin-left: 20px;
+        border-radius: 12px;
+    }
+
+    .content_text_1 {
+        margin-left: 20px;
+        color: #000000;
+        font-size: 30px;
+    }
+</style>
+
+<script>
+    module.exports = {
+
+        data: {
+            title: 'Word'
+        },
+        openApp: function () {
+
+        }
+    }
+</script>

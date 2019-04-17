@@ -11,6 +11,9 @@
     },
     {
       "name": "system.prompt"
+    },
+    {
+      "name": "system.router"
     }
   ],
   "permissions": [
@@ -24,6 +27,10 @@
     "pages": {
       "Hello": {
         "component": "hello"
+      },
+      "card/freeCard": {
+        "component": "freecard",
+        "path": "/card/freeCard"
       }
     }
   },
@@ -34,5 +41,18 @@
       }
     }
   },
+  "widgets": [
+    {
+      "name": "freeCard",
+      "id": "zhfreecard123456",
+      "path": "/card/freeCard",
+      "component": "freecard",
+      "targetManufactorys": [
+        "huawei"
+      ],
+      "params": [],
+      "uses-permission": []
+    }
+  ],
   "debugable": true
 }
